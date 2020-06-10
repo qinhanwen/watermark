@@ -1,0 +1,11 @@
+{
+  "name": "watermark",
+  "version": "1.0.0",
+  "description": "生成带水印图片",
+  "main": "./lib/index.js",
+  "author": "qhw@meitu.com",
+  "license": "MIT",
+  "scripts": {
+    "build": "rm -rf lib && tsc"
+  }
+}
