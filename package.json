@@ -1,5 +1,5 @@
 {
-  "name": "watermark",
+  "name": "qhw-watermark",
   "version": "1.0.0",
   "description": "生成带水印图片",
   "main": "./lib/index.js",
