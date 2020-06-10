@@ -1,6 +1,15 @@
 
 ###生成带水印图片
+
+####安装
+```shell
+npm i qhw-watermark -S
+```
+
+
+
 ####使用姿势
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
