@@ -15,7 +15,7 @@ interface Options {
 class WaterMark {
   ops: Options = {
     maxWidth: 600,
-    radix: 3
+    radix: 3,
   };
 
   constructor(ops: Options) {
@@ -26,12 +26,14 @@ class WaterMark {
    * blob 转 blobURL
    * @param args Blob 数组
    */
-  getImgBlobURL(...args: Array<Blob>) {
-    return args.map(blob => {
-      if (blob instanceof Blob) {
-        return URL.createObjectURL(blob);
+  getImgBlobURL(...args: Array<Blob | string>) {
+    return args.map(item => {
+      if (typeof item === "string") {
+        return item;
+      } else if (item instanceof Blob) {
+        return URL.createObjectURL(item);
       } else {
-        throw new TypeError("invalid blob");
+        throw new TypeError("无效的图片参数");
       }
     });
   }
@@ -70,10 +72,8 @@ class WaterMark {
    *  @param watermarkElement 水印图片 dom 实例
    */
   rendermarkImgToCanvas(watermarkElement: HTMLImageElement) {
-    const width =
-      this.ops.watermarkWidth || watermarkElement.naturalWidth;
-    const height =
-      this.ops.watermarkHeight || watermarkElement.naturalHeight;
+    const width = this.ops.watermarkWidth || watermarkElement.naturalWidth;
+    const height = this.ops.watermarkHeight || watermarkElement.naturalHeight;
     const ctx = canvasElement.getContext("2d");
     const widthRadix = canvasElement.width / 3;
     const heightRadix = canvasElement.height / 3;
@@ -97,6 +97,7 @@ class WaterMark {
    */
   async loadImg(imgElement: HTMLImageElement, blobURL: string) {
     return new Promise((resolve, reject) => {
+      imgElement.crossOrigin = "anonymous";
       imgElement.src = blobURL;
       imgElement.onload = function() {
         resolve();
@@ -112,7 +113,10 @@ class WaterMark {
    * @param backgroundImg 背景图片 Blob
    * @param watermarkImg 水印图片 Blob
    */
-  async generatorWatermarkImg(backgroundImg: Blob, watermarkImg: Blob) {
+  async generatorWatermarkImg(
+    backgroundImg: Blob | string,
+    watermarkImg: Blob | string
+  ) {
     const [backgroundImgBlobURL, watermarkBlobURL] = this.getImgBlobURL(
       backgroundImg,
       watermarkImg
@@ -134,6 +138,7 @@ class WaterMark {
     this.renderBackgroundImgToCanvas(backgroundImgElement);
     this.rendermarkImgToCanvas(watermarkImgElement);
     this.clearImgBlobURL(backgroundImgBlobURL, watermarkBlobURL);
+
     return canvasElement.toDataURL(this.ops.mineType, this.ops.quality);
   }
 }

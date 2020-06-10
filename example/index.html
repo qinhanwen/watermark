@@ -31,7 +31,10 @@
     document.getElementById("generate").onclick = function() {
       var bgImageBlob = document.getElementById("file").files[0];
       var watermarkImageBlob = document.getElementById("file1").files[0];
-      wm.generatorWatermarkImg(bgImageBlob, watermarkImageBlob).then(dataUrl => {
+      // wm.generatorWatermarkImg(bgImageBlob, watermarkImageBlob).then(dataUrl => {
+      //   document.getElementById("img").src = dataUrl;
+      // });
+      wm.generatorWatermarkImg('http://qbpb53tsb.bkt.clouddn.com/bg.png?e=1591780750&token=Wj1Y_BjZYCEQsYNY-CPpHo7jOgiGa6QwRIXnY_I1:W5MnNUXxG3gEh3D_2GH5yB0QZhM=', 'http://qbpb53tsb.bkt.clouddn.com/logo1.png?e=1591780799&token=Wj1Y_BjZYCEQsYNY-CPpHo7jOgiGa6QwRIXnY_I1:LBfaVOYjMDTOQSIzNvBuNjgleTM=').then(dataUrl => {
         document.getElementById("img").src = dataUrl;
       });
     };

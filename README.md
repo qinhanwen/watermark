@@ -29,20 +29,25 @@
       mineType: "image/png",// 生成图片 mimetype
       quality: 0.92,// 质量 
       maxWidth: 600, // 生成图片最大宽度
-      watermarkWidth: 10,
-      watermarkHeight: 10,
+      watermarkWidth: 40,// 水印图片宽度限制
+      watermarkHeight: 30,// 水印图片高度限制
     });
     document.getElementById("generate").onclick = function() {
       var bgImageBlob = document.getElementById("file").files[0];
       var watermarkImageBlob = document.getElementById("file1").files[0];
+
+      // 使用 blob
       wm.generatorWatermarkImg(bgImageBlob, watermarkImageBlob).then(dataUrl => {
+        document.getElementById("img").src = dataUrl;
+      });
+
+      // 使用线上地址，要支持 跨域
+      wm.generatorWatermarkImg('http://qbpb53tsb.bkt.clouddn.com/bg.png?e=1591780750&token=Wj1Y_BjZYCEQsYNY-CPpHo7jOgiGa6QwRIXnY_I1:W5MnNUXxG3gEh3D_2GH5yB0QZhM=', 'http://qbpb53tsb.bkt.clouddn.com/logo1.png?e=1591780799&token=Wj1Y_BjZYCEQsYNY-CPpHo7jOgiGa6QwRIXnY_I1:LBfaVOYjMDTOQSIzNvBuNjgleTM=').then(dataUrl => {
         document.getElementById("img").src = dataUrl;
       });
     };
   </script>
 </html>
-
-
 ```
 ####截图
 ![](http://114.55.30.96/WX20200610-151729.png)
