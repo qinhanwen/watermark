@@ -19,6 +19,7 @@
     <br />
     <br />
     <button id="generate">生成</button>
+    <button id="generate1">线上图片地址生成</button>
 
     <img id="img" />
   </body>
@@ -35,13 +36,14 @@
     document.getElementById("generate").onclick = function() {
       var bgImageBlob = document.getElementById("file").files[0];
       var watermarkImageBlob = document.getElementById("file1").files[0];
-
-      // 使用 blob
       wm.generatorWatermarkImg(bgImageBlob, watermarkImageBlob).then(dataUrl => {
         document.getElementById("img").src = dataUrl;
       });
+    };
 
-      // 使用线上地址，要支持 跨域
+    document.getElementById("generate1").onclick = function() {
+      var bgImageBlob = document.getElementById("file").files[0];
+      var watermarkImageBlob = document.getElementById("file1").files[0];
       wm.generatorWatermarkImg('http://qbpb53tsb.bkt.clouddn.com/bg.png?e=1591780750&token=Wj1Y_BjZYCEQsYNY-CPpHo7jOgiGa6QwRIXnY_I1:W5MnNUXxG3gEh3D_2GH5yB0QZhM=', 'http://qbpb53tsb.bkt.clouddn.com/logo1.png?e=1591780799&token=Wj1Y_BjZYCEQsYNY-CPpHo7jOgiGa6QwRIXnY_I1:LBfaVOYjMDTOQSIzNvBuNjgleTM=').then(dataUrl => {
         document.getElementById("img").src = dataUrl;
       });
