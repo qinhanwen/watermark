@@ -35,7 +35,7 @@
     document.getElementById("generate").onclick = function() {
       var bgImageBlob = document.getElementById("file").files[0];
       var watermarkImageBlob = document.getElementById("file1").files[0];
-      wm.generatorWatemarkImg(bgImageBlob, watermarkImageBlob).then(dataUrl => {
+      wm.generatorWatermarkImg(bgImageBlob, watermarkImageBlob).then(dataUrl => {
         document.getElementById("img").src = dataUrl;
       });
     };

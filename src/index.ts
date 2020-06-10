@@ -112,7 +112,7 @@ class WaterMark {
    * @param backgroundImg 背景图片 Blob
    * @param watermarkImg 水印图片 Blob
    */
-  async generatorWatemarkImg(backgroundImg: Blob, watermarkImg: Blob) {
+  async generatorWatermarkImg(backgroundImg: Blob, watermarkImg: Blob) {
     const [backgroundImgBlobURL, watermarkBlobURL] = this.getImgBlobURL(
       backgroundImg,
       watermarkImg
